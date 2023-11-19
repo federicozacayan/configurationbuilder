@@ -1,12 +1,14 @@
 import React from 'react';
+import Modal from './Modal';
 
-export default function RequestSelect({ requests, index, setIndex }) {
+export default function RequestSelect({ requests, index, setIndex, deleteRequest }) {
   const noneRequests = requests.length === 0;
 
   const handleChange = (e) => {
     const { value } = e.target;
     setIndex(value);
   };
+  
 
   return (
     <>
@@ -39,13 +41,16 @@ export default function RequestSelect({ requests, index, setIndex }) {
         <button
           type="submit"
           className="btn btn-danger mt-3"
-          onClick={() => {
-            // Add your delete logic here
-          }}
+          data-bs-toggle="modal" data-bs-target="#deleteRequest"
+          // onClick={() => {
+          //   // Add your delete logic here
+          // }}
         >
           Delete
         </button>
+        
       )}
+      <Modal  deleteRequest={deleteRequest} request={requests[index]} /> 
     </>
   );
 }

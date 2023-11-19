@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import Input from './Input'
 import useLocalStorage from '../../tools/UseLocalStorage';
 import { request as dummyRequest, requests as dummyRequests } from '../../tools/DummyData';
 import RequestSelect from './RequestSelect';
-import RequestTable from './RequestTable';
 import RequestForm from './RequestForm';
 
 export default function Request() {
@@ -34,6 +32,17 @@ export default function Request() {
             [name]: value,
         }));
     };
+    const deleteRequest = () => {
+        // alert('deleteRequest')
+        setRequestList((prevData) => {
+            console.log("Before delete", prevData.length);
+            prevData.splice(index, 1);
+            console.log("After delete", prevData.length);
+            return prevData;
+        });
+        setRequest(requestList[0])
+        setIndex(0);
+      }
 
     return (
         <div className='container'>
@@ -47,7 +56,7 @@ export default function Request() {
                     setIndex={setIndex} />
                 <div className="col-sm-6">
 
-                    <RequestSelect requests={requestList} index={index} setIndex={setIndex2} />
+                    <RequestSelect requests={requestList} index={index} setIndex={setIndex2} deleteRequest={deleteRequest}/>
                     {/* <RequestTable /> */}
                 </div>
             </div>

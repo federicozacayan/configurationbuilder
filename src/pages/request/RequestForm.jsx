@@ -15,6 +15,7 @@ export default function RequestForm({ request, handleDataChange, handleNameChang
         const equalName = requestList[index]?.name == request?.name
         return equalData && equalName 
     })()
+    
     const cloneRequest = () => {
         setIndex(requestList.length)
         setRequestList((prevData) => {

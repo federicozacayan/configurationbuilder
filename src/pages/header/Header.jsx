@@ -95,8 +95,8 @@ export default function Header() {
         <div className="col-sm-6">
           <Table headers={currentHeaderList} setHeaderIndex={selectHeader} />
 
-          <Modal deleteHeader={deleteHeader} index={headerIndex} />
-          <ModalConfirmation saveHeader={saveHeader}/>
+          <Modal deleteHeader={deleteHeader} index={headerIndex} currentHeader={currentHeaderList[headerIndex]} />
+          <ModalConfirmation saveHeader={saveHeader} header={header} currentHeader={currentHeaderList[headerIndex]} />
         </div>
       </div>
     </div>
