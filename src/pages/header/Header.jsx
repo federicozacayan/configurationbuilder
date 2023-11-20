@@ -22,7 +22,7 @@ export default function Header() {
   }
   ///////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////
-  const currentHeaderList = requestList[index].data.headers
+  let currentHeaderList = requestList[index].data.headers
   if (!currentHeaderList[headerIndex]) {
     setHeaderIndex(0)
     setHeader(currentHeaderList[0])
