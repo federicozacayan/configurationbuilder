@@ -15,7 +15,7 @@ export default function Modal({ deleteRequest, request }) {
             </div>
             <div className="modal-body">
               <p>This action cannot be undone. Are you sure you want to delete this request?</p>
-              REQUEST <b>{request.name}</b>
+              REQUEST <b>{request?.name || "[name]"}</b>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">

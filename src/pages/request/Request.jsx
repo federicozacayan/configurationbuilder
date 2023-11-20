@@ -8,7 +8,14 @@ export default function Request() {
     const [request, setRequest] = useLocalStorage('request', dummyRequest);
     const [requestList, setRequestList] = useLocalStorage('requests', dummyRequests);
     const [index, setIndex] = useLocalStorage('requestIndex', 0);
-    console.log("getting index", index);
+    const [flag, setFlag] = useState(false)
+    const refresh = () => {
+        setRequestList((prevData) => {
+            prevData[index] = request;
+            return prevData;
+        });
+        setFlag(!flag)
+    }
     const setIndex2 = (value) => {
         setIndex(value);
         setRequest(requestList[value]);
@@ -53,11 +60,10 @@ export default function Request() {
                     handleNameChange={handleNameChange}
                     setRequest={setRequest}
                     index={index}
-                    setIndex={setIndex} />
+                    setIndex={setIndex} 
+                    refresh={refresh}/>
                 <div className="col-sm-6">
-
                     <RequestSelect requests={requestList} index={index} setIndex={setIndex2} deleteRequest={deleteRequest}/>
-                    {/* <RequestTable /> */}
                 </div>
             </div>
         </div>

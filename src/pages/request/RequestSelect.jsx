@@ -9,7 +9,7 @@ export default function RequestSelect({ requests, index, setIndex, deleteRequest
     setIndex(value);
   };
   
-
+  console.log("Refresh Select")
   return (
     <>
       <select
@@ -17,7 +17,7 @@ export default function RequestSelect({ requests, index, setIndex, deleteRequest
         size={10}
         aria-label="Size 3 select example"
         onChange={handleChange}
-        value={index}
+        defaultValue={index}
       >
         {noneRequests && <option value="" defaultValue>None service-request created</option>}
         {requests.map((request, id) => (

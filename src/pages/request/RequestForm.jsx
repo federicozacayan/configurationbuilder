@@ -5,28 +5,29 @@ import { requests as dummyRequests } from '../../tools/DummyData';
 import eventBus from '../../tools/EventBus';
 import pages from '../Pages';
 
-export default function RequestForm({ request, handleDataChange, handleNameChange, setRequest, index, setIndex }) {
+export default function RequestForm({ request, handleDataChange, handleNameChange, setRequest, index, setIndex,refresh }) {
     const [requestList, setRequestList] = useLocalStorage('requests', dummyRequests);
-    
+    //to  refresh the page
+    // const [flag, setFlag] = useState(false)
     const disableBtn = (() => {
-        const { headers, ...storedObj } = requestList[index]?.data || {}
-        const { headers: headers2, ...currentObj } = request?.data || {}
+        const { headers, body, ...storedObj } = requestList[index]?.data || {}
+        const { headers: headers2, body:body2, ...currentObj } = request?.data || {}
         const equalData = JSON.stringify(storedObj) == JSON.stringify(currentObj) && requestList[index]
         const equalName = requestList[index]?.name == request?.name
         return equalData && equalName 
     })()
     
     const cloneRequest = () => {
-        setIndex(requestList.length)
+        const index = requestList.length
+        setIndex(index)//infrement the index
         setRequestList((prevData) => {
-            prevData.push(request);
+            prevData[index] = request;
             return prevData;
+            
         });
-        eventBus.dispatch("goto", pages.Actions)
-        setTimeout(() => {
-            console.log('goto request delay')
-            eventBus.dispatch("goto", pages.Request)
-        }, 100);
+        refresh()
+        // setFlag(!flag)
+        console.log('request cloned ')
         
     }
     const save = () => {
@@ -34,19 +35,19 @@ export default function RequestForm({ request, handleDataChange, handleNameChang
             prevData[index] = request;
             return prevData;
         });
-        eventBus.dispatch("goto", pages.Actions)
-        setTimeout(() => {
-            eventBus.dispatch("goto", pages.Request)
-        }, 100);
+        refresh()
     }
     const addHeaders = () => {
         eventBus.dispatch("goto", pages.Header)
     }
+
+    const addBody = () => {
+        eventBus.dispatch("goto", pages.Body)
+    }
+
     const discardChanges = () => {
-        console.log('discardChanges index', index);
         setRequest(requestList[index])
     }
-    // console.log(JSON.stringify(requestList[index]), JSON.stringify(request));
     return (
         <div className="col-sm-6">
             <form className="row">
@@ -68,15 +69,21 @@ export default function RequestForm({ request, handleDataChange, handleNameChang
                 disabled={disableBtn || !requestList[index]}
             >Discard Changes</button>
             <button type="submit"pass
-                className="btn btn-info ms-2"
-                onClick={addHeaders}
-                disabled={!disableBtn}
-            >Add Headers</button>
-            <button type="submit"pass
                 className="btn btn-success ms-2"
                 onClick={cloneRequest}
-                disabled={JSON.stringify(requestList[index]) != JSON.stringify(request)}
+                disabled={!disableBtn}
             >Clone Request</button>
+            <br />
+            <button type="submit"pass
+                className="btn btn-info mt-2"
+                onClick={addHeaders}
+                disabled={!disableBtn}
+            >Headers</button>
+            <button type="submit"pass
+                className="btn btn-info ms-2 mt-2"
+                onClick={addBody}
+                disabled={!disableBtn}
+            >Body</button>
         </div>
     )
 }
