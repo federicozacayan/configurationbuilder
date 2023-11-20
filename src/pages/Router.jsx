@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import eventBus from '../tools/EventBus'
+import Landing from './landing/Landing'
 
 
 export default function Router() {
-    const [page, setPage] = useState('Check the menu')
+    const [page, setPage] = useState(Landing)
     useEffect(() => {
         //only one time
         eventBus.subscribe('goto', (page) => {

@@ -6,6 +6,7 @@ import Steps from './steps/Steps';
 import Parameters from './parameters/Parameters';
 import Empty from './empty/Empty';
 import MappingDetail from './mappingdetail/MappingDetail';
+import Configuration from './configuration/Configuration';
 
 const pages = {
     "Request": <Request />,
@@ -14,7 +15,8 @@ const pages = {
     "Steps": <Steps />,
     "Mapping": <Mapping />,
     "MappingDetails": <MappingDetail />,
-    "Parameters": <Parameters />,
+    "Configuration": <Configuration />,
+    "ParametersTODO": <Parameters />,
     "Empty": <Empty />,
 };
 

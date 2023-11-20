@@ -17,7 +17,7 @@ export default function SideBar() {
     return (
         <div className="offcanvas offcanvas-end  bg-dark" tabIndex={-1} id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div className="offcanvas-header">
-                <h5 className="offcanvas-title text-light" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+                <h5 className="offcanvas-title text-light" id="offcanvasDarkNavbarLabel">Menu</h5>
                 <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" />
             </div>
             <div className="offcanvas-body bg-dark">
@@ -67,19 +67,19 @@ export default function SideBar() {
                         </ul>
                     </li>
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link" href="#">Dummy</a>
-                    </li>
+                    </li> */}
                 </ul>
 
 
-                <form className="d-flex mt-3 mb-3" role="search">
+                {/* <form className="d-flex mt-3 mb-3" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                     <button className="btn btn-success" type="submit">Search</button>
-                </form>
+                </form> */}
 
 
-                <Acordion />
+                {/* <Acordion /> */}
             </div>
         </div>
     )
