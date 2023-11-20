@@ -149,8 +149,8 @@ body =  `{
     "dummyField": "dummyValue"
   }`
   const step = {
-    "type": "",
-    "name": "",
+    "type": "request",
+    "name": "[NONE]",
     "description": "[Description of the step]"
   }
 export { request, requests, header, body, step }

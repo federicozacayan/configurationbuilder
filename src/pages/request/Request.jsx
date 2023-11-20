@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useLocalStorage from '../../tools/UseLocalStorage';
 import { request as dummyRequest, requests as dummyRequests } from '../../tools/DummyData';
 import RequestSelect from './RequestSelect';
 import RequestForm from './RequestForm';
+import pages from '../Pages';
+import eventBus from '../../tools/EventBus';
 
 export default function Request() {
     const [request, setRequest] = useLocalStorage('request', dummyRequest);
     const [requestList, setRequestList] = useLocalStorage('requests', dummyRequests);
     const [index, setIndex] = useLocalStorage('requestIndex', 0);
-    const [flag, setFlag] = useState(false)
     const refresh = () => {
-        setRequestList((prevData) => {
-            prevData[index] = request;
-            return prevData;
-        });
-        setFlag(!flag)
+        eventBus.dispatch("goto", pages.Empty)
+        setTimeout(() => {
+            eventBus.dispatch("goto", pages.Request)
+        }, 1);
     }
     const setIndex2 = (value) => {
         setIndex(value);
@@ -49,7 +49,7 @@ export default function Request() {
         });
         setRequest(requestList[0])
         setIndex(0);
-      }
+    }
 
     return (
         <div className='container'>
@@ -60,10 +60,10 @@ export default function Request() {
                     handleNameChange={handleNameChange}
                     setRequest={setRequest}
                     index={index}
-                    setIndex={setIndex} 
-                    refresh={refresh}/>
+                    setIndex={setIndex}
+                    refresh={refresh} />
                 <div className="col-sm-6">
-                    <RequestSelect requests={requestList} index={index} setIndex={setIndex2} deleteRequest={deleteRequest}/>
+                    <RequestSelect requests={requestList} index={index} setIndex={setIndex2} deleteRequest={deleteRequest} />
                 </div>
             </div>
         </div>

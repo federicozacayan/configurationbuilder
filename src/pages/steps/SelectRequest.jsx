@@ -7,7 +7,6 @@ export default function SelectRequest({ onChange, value }) {
     const change = (e) => {
         onChange(e);
     }
-    console.log("defaultValue", value);
     return (
         <select className="form-select" onChange={change} defaultValue={value}>
             <option value={""}>--SELECT A REQUEEST--</option>
