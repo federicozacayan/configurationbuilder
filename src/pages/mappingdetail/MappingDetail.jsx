@@ -4,7 +4,7 @@ import { mapping as dummyMapping } from '../../tools/DummyData';
 import Table from './Table';
 import Objecthandler from './Objecthandler';
 
-export default function Mapping() {
+export default function MappingDetail() {
   const [mapping, setMapping] = useLocalStorage('mapping', dummyMapping);
   const [JsonPath, setJsonPath] = useState({ source: "", target: "" });
   const [index, setIndex] = useState(0);

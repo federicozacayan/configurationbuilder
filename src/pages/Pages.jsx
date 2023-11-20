@@ -5,6 +5,7 @@ import Body from './body/Body';
 import Steps from './steps/Steps';
 import Parameters from './parameters/Parameters';
 import Empty from './empty/Empty';
+import MappingDetail from './mappingdetail/MappingDetail';
 
 const pages = {
     "Request": <Request />,
@@ -12,6 +13,7 @@ const pages = {
     "Body": <Body />,
     "Steps": <Steps />,
     "Mapping": <Mapping />,
+    "MappingDetails": <MappingDetail />,
     "Parameters": <Parameters />,
     "Empty": <Empty />,
 };

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function StepTypeSelector({ step, onChange, value }) {
+export default function StepTypeSelector({ onChange, value, typeSelectorLabel }) {
     return (
         <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">Step Type</label>
+            <label htmlFor="exampleInputEmail1" className="form-label">{typeSelectorLabel||"Step Type"}</label>
             <select className="form-select"
                 defaultValue={value}
                 onChange={onChange}>

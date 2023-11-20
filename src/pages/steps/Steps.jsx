@@ -99,7 +99,7 @@ export default function Steps() {
               onChange={setStepDescription}
               placeholder="Benefit" />
           </div>
-          <StepTypeSelector step={step} onChange={setStepTypeHandler} value={stepType}/>
+          <StepTypeSelector  onChange={setStepTypeHandler} value={stepType}/>
           <div className="mb-3">
             {(stepType != "") && <label htmlFor="exampleInputEmail1" className="form-label">Action (Dinamic)</label>}
             {(stepType == "request") && <SelectRequest onChange={setStepName} value={step?.name||""} />}

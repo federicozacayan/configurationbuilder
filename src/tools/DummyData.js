@@ -145,12 +145,42 @@ let body = `{
         }
     ]
   }`
-body =  `{
+body = `{
     "dummyField": "dummyValue"
   }`
-  const step = {
+const step = {
     "type": "request",
     "name": "[NONE]",
     "description": "[Description of the step]"
-  }
-export { request, requests, header, body, step }
+}
+
+const mapping = {
+    "name": "masterAgreementNumber",
+    "params":{ 
+        "objects": {
+            "source": {
+                "type": "request",
+                "name": "hello",
+            },
+            "target": {
+                "type": "request",
+                "name": "canonical",
+            }
+        },
+        "expressions": [
+            {
+                "source": "$.store.book[1].title",
+                "target": "$.masterAgreementNumber"
+            },
+            {
+                "source": "$.store.book[1].title",
+                "target": "$.billGroups"
+            },
+            {
+                "source": "$.store.book[1].title",
+                "target": "$.carrier"
+            }
+        ]
+    }
+}
+export { request, requests, header, body, step , mapping}
