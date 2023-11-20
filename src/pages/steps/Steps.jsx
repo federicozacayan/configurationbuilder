@@ -46,6 +46,7 @@ export default function Steps() {
 
   const onclick = (value) => {
     setStepListIndex(value)
+    setStep(stepList[value])
     refresh()
   }
   const discardChanges = () => {

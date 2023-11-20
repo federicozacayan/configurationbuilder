@@ -183,4 +183,9 @@ const mapping = {
         ]
     }
 }
-export { request, requests, header, body, step , mapping}
+const mapping2 = { ...mapping, name: "second" }
+const mappingList = [
+    mapping,
+    mapping2
+]
+export { request, requests, header, body, step , mapping, mappingList}

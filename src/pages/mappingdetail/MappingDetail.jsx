@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
 import useLocalStorage from '../../tools/UseLocalStorage';
-import { mapping as dummyMapping } from '../../tools/DummyData';
+import { mapping as dummyMapping,  mappingList as dummyMappingList  } from '../../tools/DummyData';
 import Table from './Table';
 import Objecthandler from './Objecthandler';
+import eventBus from '../../tools/EventBus';
+import pages from '../Pages';
 
 export default function MappingDetail() {
-  const [mapping, setMapping] = useLocalStorage('mapping', dummyMapping);
+  const [mappingList, setMappingList] = useLocalStorage('mappingList', dummyMappingList);
+  const [mappingListIndex, setMappingListIndex] = useLocalStorage('mappingListIndex', 0);
   const [JsonPath, setJsonPath] = useState({ source: "", target: "" });
   const [index, setIndex] = useState(0);
+
+  const mapping = mappingList[mappingListIndex];
+  const setMapping = (value) => {
+    setMappingList((prevData) => {
+      prevData[mappingListIndex] = value;
+      return prevData;
+    });
+    setIndex(index);
+  }
+
+  const refresh = () => {
+    eventBus.dispatch("goto", pages.Empty)
+    setTimeout(() => {
+      eventBus.dispatch("goto", pages.MappingDetails)
+    }, 1);
+  }
   const changeSourceType = (value) => {
     setMapping({
       ...mapping,
@@ -90,6 +109,7 @@ export default function MappingDetail() {
     const newMapping = { ...mapping };
     newMapping.params.expressions[index] = JsonPath
     setMapping(newMapping);
+    refresh()
   }
 
   const discardChanges = () => {
@@ -110,10 +130,13 @@ export default function MappingDetail() {
     newMapping.params.expressions.push(JsonPath);
     setMapping(newMapping);
   }
-    
+
+  const gotoMapping = () => {
+    eventBus.dispatch("goto", pages.Mapping)
+  }
   return (
     <div className='container'>
-      <h1 className='mb-5'>Mapping</h1>
+      <h1 className='mb-5'>Mapping Details</h1>
       <div className="row">
 
         <div className="col-sm-6">
@@ -122,10 +145,10 @@ export default function MappingDetail() {
               <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
               <input
                 value={mapping.name}
-                type="email" 
-                className="form-control" 
-                id="exampleInputEmail1" 
-                aria-describedby="emailHelp" 
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
                 onChange={changeName}
                 placeholder="Benefit" />
             </div>
@@ -177,15 +200,21 @@ export default function MappingDetail() {
                 className="btn btn-secondary ms-2"
                 onClick={discardChanges}
                 disabled={disabledBtn}
-                >Discard Changes</button>
-            {/* //Cone JsonPath btn */}
-              <button type="submit" 
-              className="btn btn-primary ms-2"
-              disabled={!disabledBtn}
-              onClick={cloneJsonPathMapping}
-              >Cone JsonPath</button>
-            </div>
+              >Discard Changes</button>
+              {/* //Cone JsonPath btn */}
+              <button type="submit"
+                className="btn btn-primary ms-2"
+                disabled={!disabledBtn}
+                onClick={cloneJsonPathMapping}
+              >Clone JsonPath</button>
+              <br />
+              <button type="submit" pass
+                className="btn btn-info mt-2"
+                onClick={gotoMapping}
+              // disabled={!disableBtn}
+              >Select Mapping</button>
 
+            </div>
           </div>
         </div>
 

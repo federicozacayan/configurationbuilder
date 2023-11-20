@@ -7,8 +7,7 @@ import pages from '../Pages';
 
 export default function RequestForm({ request, handleDataChange, handleNameChange, setRequest, index, setIndex,refresh }) {
     const [requestList, setRequestList] = useLocalStorage('requests', dummyRequests);
-    //to  refresh the page
-    // const [flag, setFlag] = useState(false)
+    
     const disableBtn = (() => {
         const { headers, body, ...storedObj } = requestList[index]?.data || {}
         const { headers: headers2, body:body2, ...currentObj } = request?.data || {}
